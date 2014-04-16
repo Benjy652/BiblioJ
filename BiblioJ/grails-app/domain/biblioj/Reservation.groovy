@@ -6,6 +6,11 @@ class Reservation {
 	Date dateReservation
 	static belongsTo = Livre
 	static hasMany = [livre:Livre]
+	
+	String toString(){
+		code + " " + dateReservation
+		
+	}
 
     static constraints = {
 		code blank:false, maxSize:1000

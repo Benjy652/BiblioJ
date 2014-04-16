@@ -2,6 +2,8 @@ import biblioj.Auteur
 import biblioj.Livre
 import biblioj.TypeDocument
 
+
+
 class BootStrap {
 
     def init = { servletContext ->

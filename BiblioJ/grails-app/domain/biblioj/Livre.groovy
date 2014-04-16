@@ -8,11 +8,15 @@ class Livre {
 	static belongsTo = Auteur
 	static hasMany = [auteur:Auteur,reservation:Reservation]
 
+	String toString(){
+		titre
+		
+	}
 	
     static constraints = {
 		titre blank:false, maxSize:300
-		nombreExemplaire maxSize:300
-		nombreExemplaireDisponibles maxSize:300
+		nombreExemplaire maxSize:300, min:1
+		nombreExemplaireDisponibles maxSize:300, min:1
 		typeDocument nullable:true
     }
 }
