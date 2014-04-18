@@ -15,6 +15,10 @@ class LivreController {
         //[livreInstanceList: Livre.list(params), livreInstanceTotal: Livre.count()]
 		[livreInstanceList: rechercher(), livreInstanceTotal: Livre.count()]
     }
+	
+	def recherche(){
+		
+	}
 
     def create() {
         [livreInstance: new Livre(params)]
