@@ -20,9 +20,9 @@
 	</div>
 	<div id="formulaire-recherche">
 		<h1>Formulaire de recherche</h1>
-		
+
 		<fieldset class="form">
-				<g:form action="list" method="POST">
+				<g:form action="recherche" method="post">
 					<div class="fieldcontain">
 						<label for="queryTitre"> Titre :</label>
 						<g:textField name="queryTitre" value="${params.queryTitre}"/>
@@ -35,12 +35,9 @@
 						<label for="queryAuteur"> Auteur :</label>
 						<g:textField name="queryAuteur" value="${params.queryAuteur}"/>
 					</div>
-					<g:form action="list" >
 					<g:submitButton name="submit" value="OK" />
-					</g:form>
 				</g:form>
 			</fieldset>
-
 	</div>
 </body>
 </html>
