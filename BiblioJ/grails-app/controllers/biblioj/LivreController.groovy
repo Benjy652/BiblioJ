@@ -12,12 +12,32 @@ class LivreController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [livreInstanceList: Livre.list(params), livreInstanceTotal: Livre.count()]
+        //[livreInstanceList: Livre.list(params), livreInstanceTotal: Livre.count()]
+		[livreInstanceList: rechercher(), livreInstanceTotal: Livre.count()]
     }
 
     def create() {
         [livreInstance: new Livre(params)]
     }
+	
+	def rechercher() {
+		if (params.isEmpty()) {
+			
+		}
+		Livre.createCriteria().list {
+			and {
+				ilike('titre',"%games%")
+				typeDocument {
+					if (params.containsKey(typeDocument)) {
+						eq('intitule',"")
+					}
+				}
+				auteur {
+					ilike('nom',"%COLLINS%")
+				}
+			}
+		}
+	}
 
     def save() {
         def livreInstance = new Livre(params)
