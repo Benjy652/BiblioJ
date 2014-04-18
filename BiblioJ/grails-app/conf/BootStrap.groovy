@@ -14,7 +14,7 @@ class BootStrap {
 		typeLivreAdo.save()
 		def typeLivreAdulte = new TypeDocument(intitule:"Livre adulte")
 		typeLivreAdulte.save()
-		
+
 		def auteurVigan = new Auteur(nom:"de Vigan",prenom:"Delphine")
 		auteurVigan.save()
 		def auteurCollins = new Auteur(nom:"Collins",prenom:"Suzanne")
@@ -27,7 +27,7 @@ class BootStrap {
 		auteurMurakami.save()
 		def auteurDelacourt = new Auteur(nom:"Delacourt",prenom:"Grégoire")
 		auteurDelacourt.save()
-		
+
 		def livre1 = new Livre(titre:"Rien ne s'oppose à la nuit : roman",nombreExemplaire:3,nombreExemplaireDisponibles:3,typeDocument:typeNouveaute)
 		livre1.addToAuteur(auteurVigan)
 		livre1.save()
