@@ -24,7 +24,7 @@
 			<div class="message" role="status">${flash.message}</div>
 		</g:if>
 		<fieldset class="form">
-				<g:form action="recherche" method="post">
+				<g:form controller="formulaire" action="recherche" method="post">
 					<div class="fieldcontain">
 						<label for="queryTitre"> Titre :</label>
 						<g:textField name="queryTitre" value="${params.queryTitre}"/>
@@ -40,6 +40,24 @@
 					<g:submitButton name="submit" value="OK" />
 				</g:form>
 			</fieldset>
+	</div>
+	<div id="listeRecherche">
+	
+	<tbody>
+				<g:each in="${livreInstanceList}" status="i" var="livreInstance">
+					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+					
+						<td><g:link action="show" id="${livreInstance.id}">${fieldValue(bean: livreInstance, field: "titre")}</g:link></td>
+					
+						<td>${fieldValue(bean: livreInstance, field: "nombreExemplaire")}</td>
+					
+						<td>${fieldValue(bean: livreInstance, field: "nombreExemplaireDisponibles")}</td>
+					
+						<td>${fieldValue(bean: livreInstance, field: "typeDocument")}</td>
+					
+					</tr>
+				</g:each>
+				</tbody>
 	</div>
 </body>
 </html>

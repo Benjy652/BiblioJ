@@ -19,33 +19,7 @@ class LivreController {
 		[livreInstance: new Livre(params)]
 	}
 
-	def recherche() {
-		if (!params.containsKey('queryTitre') && !params.containsKey('queryType') && !params.containsKey('queryAuteur')) {
-			return
-		} else if (params.queryTitre.empty && params.queryType.empty && params.queryAuteur.empty) {
-			flash.message = "Veuillez remplir au moins un des champs."
-		} else {
-		flash.message = null
-			def list = Livre.createCriteria().list {
-				and {
-					if (!params.queryTitre.isEmpty()) {
-						ilike("titre","%${params.queryTitre}%")
-					}
-					typeDocument {
-						if (!params.queryType.isEmpty()) {
-							eq("intitule",params.queryType)
-						}
-					}
-					auteur {
-						if (!params.queryAuteur.isEmpty()) {
-							ilike("nom","%${params.queryAuteur}%")
-						}
-					}
-				}
-			}
-			render(view: "list", model: [livreInstanceList: list, livreInstanceTotal: list.size()])
-		}
-	}
+	
 
 	def save() {
 		def livreInstance = new Livre(params)
