@@ -20,7 +20,9 @@
 	</div>
 	<div id="formulaire-recherche">
 		<h1>Formulaire de recherche</h1>
-
+		<g:if test="${flash.message}">
+			<div class="message" role="status">${flash.message}</div>
+		</g:if>
 		<fieldset class="form">
 				<g:form action="recherche" method="post">
 					<div class="fieldcontain">

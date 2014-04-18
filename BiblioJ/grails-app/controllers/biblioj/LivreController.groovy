@@ -20,9 +20,12 @@ class LivreController {
 	}
 
 	def recherche() {
-		if (!params.queryTitre && !params.queryType && !params.queryAuteur) {
-			
+		if (!params.containsKey('queryTitre') && !params.containsKey('queryType') && !params.containsKey('queryAuteur')) {
+			return
+		} else if (params.queryTitre.empty && params.queryType.empty && params.queryAuteur.empty) {
+			flash.message = "Veuillez remplir au moins un des champs."
 		} else {
+		flash.message = null
 			def list = Livre.createCriteria().list {
 				and {
 					if (!params.queryTitre.isEmpty()) {
@@ -30,7 +33,7 @@ class LivreController {
 					}
 					typeDocument {
 						if (!params.queryType.isEmpty()) {
-							eq("intitule",params.queryTitre)
+							eq("intitule",params.queryType)
 						}
 					}
 					auteur {
