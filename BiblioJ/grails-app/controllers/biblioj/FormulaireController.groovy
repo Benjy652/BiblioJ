@@ -2,7 +2,9 @@ package biblioj
 
 class FormulaireController {
 
-    def index() {
+    def index(Integer max) {
+			params.max = Math.min(max ?: 10, 100)
+			[livreInstanceList: Livre.list(params), livreInstanceTotal: Livre.count()]
 		
 	}
 	
@@ -21,7 +23,7 @@ class FormulaireController {
 				   }
 				   typeDocument {
 					   if (!params.queryType.isEmpty()) {
-						   eq("intitule",params.queryType)
+						   ilike("intitule","%${params.queryType}%")
 					   }
 				   }
 				   auteur {

@@ -1,0 +1,105 @@
+@CHARSET "UTF-8";
+
+
+
+			#page-body {
+				margin: 2em 1em 1.25em 18em;
+			}
+
+			h2 {
+				margin-top: 1em;
+				margin-bottom: 0.3em;
+				font-size: 1em;
+			}
+
+			p {
+				line-height: 1.5;
+				margin: 0.25em 0;
+			}
+			
+#page-body{
+	position: relative;
+	height:200px;
+}
+#formulaireSelect{
+	position: relative;
+	top:20px;
+	margin-left: auto;
+  margin-right: auto;
+}
+
+#formulaireSelect a:link,  #formulaireSelect a:visited {
+	
+width:200px;
+	background-color:#7f8c8d;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff!important;
+	font-family:arial;
+	font-size:14px;
+	text-align:center;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+
+}
+
+#formulaireSelect a:hover{
+	background-color:#d35400;
+}
+
+#grailsLogo a {
+	display: inline-block;
+	margin: 1em;
+	background-color:#f39c12;
+
+}
+
+.nav a{
+	width:80px;
+	
+}
+.formSubmit{
+	margin-left:250px;
+	margin-top:20px;
+	width:120px;
+	background-color:#7f8c8d;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:arial;
+	font-size:14px;
+	text-align:center;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+
+.formSubmit:hover{
+background-color:#d35400;
+}
+
+td{
+	
+	color:#000;
+	font-family:arial;
+	font-size:14px;
+	text-align:center!important;
+	padding-top: 16px!important;
+}
+
+td:link{
+	font-family:arial!important;
+	font-size:18px!important;
+}
+
+#formulaire-recherche h1{
+	padding-left: 10px;
+}
+
