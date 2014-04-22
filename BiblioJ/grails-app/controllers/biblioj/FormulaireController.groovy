@@ -4,29 +4,81 @@ class FormulaireController {
 
 	
 	ArrayList panier = new ArrayList()
-	int i=0
 
     def index(Integer max) {
-			params.max = Math.min(max ?: 5, 100)
-			[livreInstanceList: Livre.list(params), livreInstanceTotal: Livre.count()]
+		//params.list('panier').eachWithIndex() { obj, i -> println "plop ${i}: ${obj}" };
+		//panier=params.list('panier')
+		
+		params.max = Math.min(max ?: 5, 100)
+		//params.panier.eachWithIndex() { obj, i -> println "plop ${i}: ${obj}" };
+			
+		[livreInstanceList: Livre.list(params), livreInstanceTotal: Livre.count()/*, panier:panier*/]
 		
 	}
-	def reserver(){
+	
+	def retirer(Integer max){
+		params.max = Math.min(max ?: 5, 100)
+		int index=0
 		
 		if(session["auteur"]) panier=session["auteur"]
-		panier.add(params.auteur)
+		if(params.auteur){
+			panier.eachWithIndex() { obj, i -> if(obj==params.auteur) index=i };
+		panier.remove(index)
 		session["auteur"] = panier
-		ArrayList auteur = session["auteur"]
+		}
+		
+		def livre = Livre.createCriteria().get {
+			ilike('titre',"%${params.auteur}%")
+			lock true
+		}
+		if(livre){
+		livre.nombreExemplaireDisponibles+=1
+		livre.save()
+		}
 		println"session"
-		auteur.each() { println " ${it} ${auteur.size()}" };
-		render(view: "index", model: [livreInstanceList: Livre.list(params), livreInstanceTotal: Livre.count()])
+		panier.eachWithIndex() { obj, i -> println " ${i}: ${obj}" };
+		/*for(x in panier){
+			println " ${x} ${panier.size()}"
+		}*/
+		//auteur.each() { println " ${it} ${auteur.size()}" };
+		//redirect(action: "index", params: [panier: panier])
+		
+		render(view: "index", model: [livreInstanceList: Livre.list(params), livreInstanceTotal: Livre.count(), panier:panier,offset: params.offset, max: params.max])
+	}
+	
+	
+	def reserver(Integer max){
+		params.max = Math.min(max ?: 5, 100)		
+		
+		if(session["auteur"]) panier=session["auteur"]
+		if(params.auteur) panier.add(params.auteur)
+		session["auteur"] = panier
+		
+		def livre = Livre.createCriteria().get {
+			ilike('titre',"%${params.auteur}%")
+			lock true
+		}
+		if(livre){
+		livre.nombreExemplaireDisponibles-=1
+		livre.save()
+		}
+		println"session"
+		panier.eachWithIndex() { obj, i -> println " ${i}: ${obj}" };
+		/*for(x in panier){
+			println " ${x} ${panier.size()}"
+		}*/
+		//auteur.each() { println " ${it} ${auteur.size()}" };
+		//redirect(action: "index", params: [panier: panier])
+		
+		render(view: "index", model: [livreInstanceList: Livre.list(params), livreInstanceTotal: Livre.count(), panier:panier])
 	}
 	
 	def recherche() {
+		if(session["auteur"]) panier=session["auteur"]
 		
 		if (params.queryTitre.empty && params.queryType.empty && params.queryAuteur.empty) {
 			flash.message = "Veuillez remplir au moins un des champs."
-			redirect(action: "index")
+			redirect(action: "reserver")
 		}
 	   else{
 		   flash.message = null
@@ -48,7 +100,7 @@ class FormulaireController {
 			   }
 		   }
 		   //redirect(action: "list")
-		   render(view: "index", model: [livreInstanceList: list, livreInstanceTotal: list.size()])
+		   render(view: "index", model: [livreInstanceList: list, livreInstanceTotal: list.size(),panier:panier])
 	   }
 	   
 	}

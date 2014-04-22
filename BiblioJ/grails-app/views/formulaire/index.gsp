@@ -48,8 +48,14 @@
 	<g:each in="${livreInstanceList}" status="i" var="livreInstance">
 	</g:each>
 	
-	<p>Livre 1</p>
-	<p>Livre 2</p>
+	
+	<g:if test="${panier!=null}">
+   
+	<g:each var="i" in="${ (0..<panier.size()) }">
+    <p>${panier.get(i)}</p>
+  </g:each>
+</g:if>
+
 	
 	</div>
 	</div>
@@ -85,14 +91,20 @@
 					
 						<td>${fieldValue(bean: livreInstance, field: "typeDocument")}</td>
 						
-						<td><g:link class="formSubmit2" action="reserver" params="[auteur:"${fieldValue(bean: livreInstance, field: "typeDocument")}"]" id="${i}">Reserver</g:link></td>
 						
+						<g:if test="${panier.contains(fieldValue(bean: livreInstance, field: "titre"))}"><td><g:link class="formSubmit3" action="retirer" params="[auteur:"${fieldValue(bean: livreInstance, field: "titre")}"]" id="${i}">Retirer</g:link></td>
+						</g:if>
+						<g:else>
+						<g:if test="${fieldValue(bean: livreInstance, field: "nombreExemplaireDisponibles") !='0'}"><td><g:link class="formSubmit2" action="reserver" params="[auteur:"${fieldValue(bean: livreInstance, field: "titre")}"]" id="${i}">Reserver</g:link></td>
+						</g:if>
+						
+						</g:else>
 					</tr>
 				</g:each>
 				</tbody>
 			</table>
 			<div class="pagination">
-				<g:paginate max="10" total="${livreInstanceTotal}" />
+				<g:paginate max="5" total="${livreInstanceTotal}" />
 			</div>
 		</div>
 	</div>
