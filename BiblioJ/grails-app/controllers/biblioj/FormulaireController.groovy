@@ -2,10 +2,24 @@ package biblioj
 
 class FormulaireController {
 
+	
+	ArrayList panier = new ArrayList()
+	int i=0
+
     def index(Integer max) {
-			params.max = Math.min(max ?: 10, 100)
+			params.max = Math.min(max ?: 5, 100)
 			[livreInstanceList: Livre.list(params), livreInstanceTotal: Livre.count()]
 		
+	}
+	def reserver(){
+		
+		if(session["auteur"]) panier=session["auteur"]
+		panier.add(params.auteur)
+		session["auteur"] = panier
+		ArrayList auteur = session["auteur"]
+		println"session"
+		auteur.each() { println " ${it} ${auteur.size()}" };
+		render(view: "index", model: [livreInstanceList: Livre.list(params), livreInstanceTotal: Livre.count()])
 	}
 	
 	def recherche() {

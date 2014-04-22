@@ -17,6 +17,7 @@
 						code="default.home.label" /></a></li>
 		</ul>
 	</div>
+	<div id="query">
 	<div id="formulaire-recherche">
 		<h1>Recherchez vos livres</h1>
 		<g:if test="${flash.message}">
@@ -40,6 +41,19 @@
 				</g:form>
 			</fieldset>
 	</div>
+	
+	<div id="panier">
+	<div id="panierContent">
+	<h1>Panier</h1>
+	<g:each in="${livreInstanceList}" status="i" var="livreInstance">
+	</g:each>
+	
+	<p>Livre 1</p>
+	<p>Livre 2</p>
+	
+	</div>
+	</div>
+	</div>
 	<div id="listeRecherche">
 	
 	
@@ -53,7 +67,7 @@
 					
 						<g:sortableColumn property="nombreExemplaireDisponibles" title="${message(code: 'livre.nombreExemplaireDisponibles.label', default: 'Nombre Exemplaire Disponibles')}" />
 					<g:sortableColumn property="typeDocument" title="${message(code: 'livre.typeDocument.label', default: 'Type Document')}" />
-					
+					<g:sortableColumn property="reservez" title="${message(code: 'livre.reservez', default: 'Reservez')}"/>
 
 					
 					</tr>
@@ -70,13 +84,15 @@
 						
 					
 						<td>${fieldValue(bean: livreInstance, field: "typeDocument")}</td>
-					
+						
+						<td><g:link class="formSubmit2" action="reserver" params="[auteur:"${fieldValue(bean: livreInstance, field: "typeDocument")}"]" id="${i}">Reserver</g:link></td>
+						
 					</tr>
 				</g:each>
 				</tbody>
 			</table>
 			<div class="pagination">
-				<g:paginate total="${livreInstanceTotal}" />
+				<g:paginate max="10" total="${livreInstanceTotal}" />
 			</div>
 		</div>
 	</div>
