@@ -68,10 +68,12 @@ class FormulaireController {
 			println " ${x} ${panier.size()}"
 		}*/
 		//auteur.each() { println " ${it} ${auteur.size()}" };
-		//redirect(action: "index", params: [panier: panier])
 		
 		render(view: "index", model: [livreInstanceList: Livre.list(params), livreInstanceTotal: Livre.count(), panier:panier])
 	}
+	
+
+   
 	
 	def recherche() {
 		if(session["auteur"]) panier=session["auteur"]

@@ -13,7 +13,7 @@
 			<h1>Bienvenue sur BiblioJ !</h1>
 			<p>Ici vous pouvez parcourir notre bibliothèque et réserver nimporte quels livres disponible!</p>
 	<div id="formulaireSelect">
-			<a class="home" href="${createLink(uri: '/formulaire')}">Rechercher des livres</a>
+			<a class="home" href="${createLink(uri: '/formulaire/reserver')}">Rechercher des livres</a>
 		</div>
 		</div>
 		

@@ -16,7 +16,7 @@ class Livre {
     static constraints = {
 		titre blank:false, maxSize:300
 		nombreExemplaire maxSize:300, min:1
-		nombreExemplaireDisponibles maxSize:300, min:1
+		nombreExemplaireDisponibles maxSize:300, min:0
 		typeDocument nullable:true
     }
 }

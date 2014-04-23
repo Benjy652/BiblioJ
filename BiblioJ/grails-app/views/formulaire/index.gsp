@@ -44,7 +44,7 @@
 	
 	<div id="panier">
 	<div id="panierContent">
-	<h1>Panier</h1>
+	 <img src="${resource(dir: 'images', file: 'books.png')}" /><h1>Panier</h1>
 	<g:each in="${livreInstanceList}" status="i" var="livreInstance">
 	</g:each>
 	
@@ -52,7 +52,7 @@
 	<g:if test="${panier!=null}">
    
 	<g:each var="i" in="${ (0..<panier.size()) }">
-    <p>${panier.get(i)}</p>
+   <img src="${resource(dir: 'images', file: 'book.png')}" /> <p>${panier.get(i)}</p>
   </g:each>
 </g:if>
 
@@ -92,6 +92,10 @@
 						<td>${fieldValue(bean: livreInstance, field: "typeDocument")}</td>
 						
 						
+						
+						
+						
+						<g:if test="${panier!=null}">
 						<g:if test="${panier.contains(fieldValue(bean: livreInstance, field: "titre"))}"><td><g:link class="formSubmit3" action="retirer" params="[auteur:"${fieldValue(bean: livreInstance, field: "titre")}"]" id="${i}">Retirer</g:link></td>
 						</g:if>
 						<g:else>
@@ -99,6 +103,8 @@
 						</g:if>
 						
 						</g:else>
+						</g:if>
+						
 					</tr>
 				</g:each>
 				</tbody>
